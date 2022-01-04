@@ -23,24 +23,32 @@ function newNonPlayableCharacter(x, y) {
 
     setInterval(moveCharacter, 1)
 
-    function walkEast() {
+    async function walkEast(time) {
         direction = 'east'
         element.src = `./assets/red-character/east.gif`
+        await sleep(time)
+        stop()
     }
 
-    function walkNorth() {
+    async function walkNorth(time) {
         direction = 'north'
         element.src = `./assets/red-character/north.gif`
+        await sleep(time)
+        stop()
     }
 
-    function walkWest() {
+    async function walkWest(time) {
         direction = 'west'
         element.src = `./assets/red-character/west.gif`
+        await sleep(time)
+        stop()
     }
 
-    function walkSouth() {
+    async function walkSouth(time) {
         direction = 'south'
         element.src = `./assets/red-character/south.gif`
+        await sleep(time)
+        stop()
     }
 
     function stop() {
@@ -56,4 +64,27 @@ function newNonPlayableCharacter(x, y) {
         walkSouth: walkSouth,
         stop: stop
     }
+}
+
+function sleep(time){
+    return new Promise(resolve => {
+        setTimeout(resolve, time)
+    })  
+}
+
+function moveNPC(_time) {
+    if (direction === 'west') {
+        x -= 1
+    }
+    if (direction === 'north') {
+        y += 1
+    }
+    if (direction === 'east') {
+        x += 1
+    }
+    if (direction === 'south') {
+        y -= 1
+    }
+    element.style.left = x + 'px'
+    element.style.bottom = y + 'px'
 }
